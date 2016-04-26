@@ -1,0 +1,54 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
+html {
+    font-family: Roboto !important;
+    font-style: normal !important;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    background-image: url("https://static.licdn.com/scds/common/u/images/themes/katy/textures/texture_grain_200x200_v2.png")
+}
+
+.top-header {
+    background-color: #5e5e5e;
+    height: 42.75px;
+}
+
+.logo-linked {
+    margin: 3px 5px 0 0;
+}
+
+.container-fluid {
+    width: 100%;
+    height: 404px !important;
+    background-image: url("https://media.licdn.com/media/p/7/005/066/160/199ad4f.jpg");
+}
+
+.profile-overall {
+    margin-top: 210px;
+}
+
+.profile-overall-picture {
+    float: left;
+}
+
+.profile-overall-summary {
+    overflow: hidden;
+    padding: 20px;
+    height: 240px;
+    background-color: white;
+}
+
+.profile-overall-extra {
+    
+}
+
+.full-name {
+    font-size: 22px;
+    font-family: Roboto;
+}

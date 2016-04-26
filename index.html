@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LinkedIn</title>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/materialize.css">
+    </head>
+    <body ng-app="app">
+        <!--Script-->
+        <script type="text/javascript" src="scripts/angular.min.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/profile.module.js"></script>
+        <script src="scripts/profile.controller.js"></script>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="scripts/materialize.js"></script>
+        
+        <div class="top-header">
+            <div class="container">
+                <img id="in-logo" class="logo-linked" src="images/In-2C-34px-R.png" alt="LinkedIn">
+            </div>
+            <div class="container-fluid"></div>
+        </div>
+        
+        <div class="container profile">
+            <div class="profile-overall" ng-controller="ProfileController as vm">
+                <div class="profile-overall-picture">
+                    <img src="http://placehold.it/240x240" alt="">
+                </div>
+                <div class="profile-overall-summary">
+                    <span class="full-name" dir="auto">{{vm.account.name}}</span>
+                    <h6><small>{{vm.account.position}} as {{vm.account.company}}</small></h6>
+                    <h6><small>{{vm.account.country}} | {{vm.account.industry}}</small></h6>
+                </div>
+                <div class="profile-overall-extra">
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
