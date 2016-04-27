@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>LinkedIn</title>
+        <title>LinkedIn-1312682</title>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
@@ -14,29 +14,150 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/profile.module.js"></script>
         <script src="scripts/profile.controller.js"></script>
+        <script src="scripts/background.module.js"></script>
+        <script src="scripts/background.controller.js"></script>
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="scripts/materialize.js"></script>
         
+        <!--Body-->
         <div class="top-header">
-            <div class="container">
-                <img id="in-logo" class="logo-linked" src="images/In-2C-34px-R.png" alt="LinkedIn">
-            </div>
             <div class="container-fluid"></div>
         </div>
         
         <div class="container profile">
             <div class="profile-overall" ng-controller="ProfileController as vm">
                 <div class="profile-overall-picture">
-                    <img src="http://placehold.it/240x240" alt="">
+                    <img src="images/avatar.jpg" alt="Avatar">
                 </div>
                 <div class="profile-overall-summary">
-                    <span class="full-name" dir="auto">{{vm.account.name}}</span>
-                    <h6><small>{{vm.account.position}} as {{vm.account.company}}</small></h6>
-                    <h6><small>{{vm.account.country}} | {{vm.account.industry}}</small></h6>
+                    <li><span class="full-name" dir="auto"><b>{{vm.account.name}}</b></span></li>
+                    <li><span class="position-name" dir="auto">{{vm.account.position}} at {{vm.account.company}}</span></li>
+                    <li><span class="country-industry-name" dir="auto">{{vm.account.country}} | {{vm.account.industry}}</span></li>
+                    <table class="work-places">
+                        <tr>
+                            <th>
+                                <li>Current</li>
+                                <li>Previous</li>
+                                <li>Education</li>
+                            </th>
+                            <th>
+                                <li><span class="current-work-name">{{vm.account.currentwork}}</span></li>
+                                <li><span class="previous-work-name">{{vm.account.previouswork}}</span></li>
+                                <li><span class="education-name">{{vm.account.education}}</span></li>
+                            </th>
+                        </tr>   
+                    </table>
+                    <div class="profile-overall-summary-connect">
+                        <a class="waves-effect waves-light btn" href="https://www.linkedin.com/profile/preview?vpa=pub&locale=en_US">Follow</a>
+                    </div>
                 </div>
-                <div class="profile-overall-extra">
-                    
+                <div class="row profile-overall-extra">
+                    <div class="col link valign-wrapper">
+                        <i id="linkA-bullet" class="valign"></i>
+                        <a class="link-ref valign" href="{{vm.account.profileUrl}}">
+                            <span>{{vm.account.profileUrl}}</span>
+                        </a>
+                    </div>
+                    <div class="col right more-info valign-wrapper link">
+                        <i id="linkB-bullet" class="valign"></i>
+                        <a class="link-ref valign" href="">
+                            <span>Contact Info</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" ng-controller="BackgroundController as sc">
+            <div id="profile" class="container">
+                <!--Background-->
+                <div class="card-body">
+                    <h2 class="card-title">Background</h2>
+                    <div id="background-content" class="card-content">
+                        <!--Summary-->
+                        <div class="background-section">
+                            <div class="valign-wrapper background-section-header">
+                                <img src=".\images\header-summary.png" class="valign" />
+                                <h3 class="valign">Summary</h3>
+                            </div>
+                            <p class="description">{{sc.summary}}</p>
+                        </div>
+                        <!--Experience-->
+                        <div class="background-section">
+                            <div class="valign-wrapper background-section-header">
+                                <img src=".\images\header-experience.png" class="valign" />
+                                <h3 class="valign">Experience</h3>
+                            </div>
+                            <div ng-repeat="exp in sc.experience">
+                                <div class="row info-bar">
+                                    <div style="display: inline-block">
+                                        <a href="https://www.linkedin.com/title/{{exp.title}}?trk=mprofile_title"
+                                            title="Learn more about this title" class="info-title">{{exp.title}}</a>
+                                        <a href="{{exp.companyUrl}}" class="info-subtitle">{{exp.companyName}}</a>
+                                        <span class="info-date">{{exp.startPeriod}} – {{exp.endPeriod}}
+                                            <span ng-show="exp.duration != ''">({{exp.duration}})</span>
+                                        <span ng-show="exp.location != ''"> | {{exp.location}}</span>
+                                        </span>
+                                    </div>
+                                    <div class="info-logo" ng-show="exp.companyLogo != ''">
+                                        <a href="{{exp.companyUrl}}">
+                                        <img src="{{exp.companyLogo}}" /> 
+                                        </a>                                    
+                                    </div>
+                                </div>
+                                <p class="description">{{exp.description}}</p>
+                            </div>
+                        </div>
+                        <!--Skills-->
+                        <div class="background-section">
+                            <div class="valign-wrapper background-section-header">
+                                <img src=".\images\header-skill.png" class="valign" />
+                                <h3 class="valign">Skills</h3>
+                            </div>
+                            <div id="skills-section">
+                                <div>
+                                    <h5>Top Skills</h5>
+                                    <div class="skill-pill" ng-repeat="skill in sc.skills | limitTo: 10">
+                                        <a class="btn-skill-count waves-effect waves-light btn">{{skill.endorsers}}</a>
+                                        <a class="btn-skill-description" href="https://www.linkedin.com/topic/{{skill.name}}?trk=mprofile_topic">
+                                            {{skill.name}}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="extra-skills" ng-show="skills.length > 10">
+                                    <h5>{{name[0]}} also knows about...</h5>
+                                    <div class="skill-pill" ng-repeat="skill in skills" ng-show="$index >= 10">
+                                        <a class="btn-skill-count waves-effect waves-light btn">{{skill.endorsers}}</a>
+                                        <a class="btn-skill-description" href="https://www.linkedin.com/topic/{{skill.name}}?trk=mprofile_topic">
+                                            {{skill.name}}
+                                        </a>
+                                    </div>                                
+                                </div>
+                            </div>
+                        </div>
+                        <!--EDUCATION SECTION-->
+                        <div class="background-section background-last-section">
+                            <div class="valign-wrapper background-section-header">
+                                <img src=".\images\header-education.png" class="valign" />
+                                <h3 class="valign">Education</h3>
+                            </div>
+                            <div>
+                                <div class="row info-bar" ng-repeat="edu in sc.education">
+                                    <div style="display: inline-block">
+                                        <a href="{{edu.url}}" class="info-title">{{edu.name}}</a>
+                                        <a class="info-subtitle">{{edu.title}}</a>
+                                        <span class="info-date">{{edu.startPeriod}} – {{edu.endPeriod}}</span>
+                                    </div>
+                                    <div class="info-logo">
+                                        <a href="{{edu.url}}">
+                                        <img src="{{edu.logo}}" height="60" /> 
+                                        </a>              
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,8 +5,67 @@
         "company": "VNUHCM - University of Science",
         "country": "Viet Nam",
         "industry": "Information Technology and Services",
-        "currentwork": "HCMUS",
+        "currentwork": "VNUHCM - University of Science",
         "previouswork": "DQ Grill & Chill",
-        "education": "University of Science"
-    }
+        "education": "University of Science",
+        "profileUrl": "https://vn.linkedin.com/in/võ-anh-tú-085b72109"
+    },
+       
+    "summary": "Internet executive with over 20 years of experience, including general management of mid to large size organizations, corporate development, product development, business operations, and strategy.Currently CEO at LinkedIn, the web's largest and most powerful network of professionals.Prior to LinkedIn, was an Executive in Residence at Accel Partners and Greylock Partners. Primarily focused on advising the leadership teams of the firm's existing consumer technology portfolio companies while also working closely with the firm’s partners to evaluate new investment opportunities.Previously served in key leadership roles at Yahoo! for over seven years, most recently as the Executive Vice President of Yahoo!'s Network Division managing Yahoo's consumer web product portfolio, including Yahoo's Front Page, Mail, Search, and Media products.Specialties: general management, corporate development, product development, business operations, strategy, product marketing, non-profit governance.",
+    
+    "experience": [
+        {
+            "companyName": "LinkedIn",
+            "companyUrl": "https://www.linkedin.com/company/1337?trk=prof-exp-company-name",
+            "companyLogo": "images/linkedin.png",
+            "title": "CEO",
+            "startPeriod": "December 2008",
+            "endPeriod": "Present",
+            "duration": "7 years 5 months",
+            "location": "",
+            "description": "Connecting the world's professionals to make them more productive and successful. Since joining the company in December 2008, LinkedIn has expanded its global platform to 23 languages and more than 30 offices around the world, grown its membership base from 33M to more than 347M, and increased its revenue from $78M to over $2.2B in 2014."
+        }
+    ],
+    
+    "skills": [
+        {
+            "name": "C++",
+            "endorsers": "20"
+        },
+        {
+            "name": "C#/.NET",
+            "endorsers": "22"
+        },
+        {
+            "name": "HTML",
+            "endorsers": "14"
+        },
+        {
+            "name": "CSS",
+            "endorsers": "12"
+        },
+        {
+            "name": "AngularJs",
+            "endorsers": "15"  
+        },
+        {
+            "name": "Android Development",
+            "endorsers": "19"
+        },
+        {
+            "name": "Data Structure",
+            "endorsers": "18"
+        }
+    ],
+    
+    "education": [
+        {
+            "name": "University of Science",
+            "url": "https://www.linkedin.com/edu/school?id=194005&trk=edu-up-nav-menu-home",
+            "logo": "images/logo-school-university-of-science.png",
+            "title": "Bachelor's Degree, Information Technology",
+            "startPeriod": "2013",
+            "endPeriod": "2017"        
+        }
+    ]
 }

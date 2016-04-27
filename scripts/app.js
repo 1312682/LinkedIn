@@ -2,6 +2,6 @@
     'use strict';
 
     angular.module('app', [
-        'app.profile'
+        'app.profile', 'app.background'
     ]);
 })();
