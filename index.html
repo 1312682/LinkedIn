@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>LinkedIn-1312682</title>
+        <title>Võ Anh Tú | LinkedIn</title>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/materialize.css">
     </head>
-    <body ng-app="app">
+    <body ng-app="app" ng-controller="ProfileController as vm">
         <!--Script-->
         <script type="text/javascript" src="scripts/angular.min.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/profile.module.js"></script>
         <script src="scripts/profile.controller.js"></script>
-        <script src="scripts/background.module.js"></script>
-        <script src="scripts/background.controller.js"></script>
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="scripts/jquery-2.2.3.min.js"></script>
-        <script type="text/javascript" src="scripts/materialize.js"></script>
+        <script src="scripts/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="scripts/materialize.min.js"></script>
         
         <!--Body-->
         <div class="top-header">
             <div class="container-fluid"></div>
         </div>
         
+        <!--Basic Information-->
         <div class="container profile">
-            <div class="profile-overall" ng-controller="ProfileController as vm">
+            <div class="profile-overall">
                 <div class="profile-overall-picture">
                     <img src="images/avatar.jpg" alt="Avatar">
                 </div>
+                
                 <div class="profile-overall-summary">
+                    <div class="info-logo">
+                        <a href="#profilemodal" class="modal-trigger">
+                            <img src="images/ic_mode_edit.png"/> 
+                        </a>                                    
+                    </div>
                     <li><span class="full-name" dir="auto"><b>{{vm.account.name}}</b></span></li>
                     <li><span class="position-name" dir="auto">{{vm.account.position}} at {{vm.account.company}}</span></li>
                     <li><span class="country-industry-name" dir="auto">{{vm.account.country}} | {{vm.account.industry}}</span></li>
@@ -69,7 +74,63 @@
             </div>
         </div>
         
-        <div class="row" ng-controller="BackgroundController as sc">
+        <!-- Modal Structure -->
+        <div id="profilemodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Information</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.name}}" id="update_name" type="text" class="validate" ng-model="vm.new_name">
+                                <label for="update_name">Fullname</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.education}}" id="update_edu" type="text" class="validate" ng-model="vm.new_edu">
+                                <label for="update_edu">Education</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.position}}" id="update_position" type="text" class="validate" ng-model="vm.new_pos">
+                                <label for="update_position">Position</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.company}}" id="update_company" type="text" class="validate" ng-model="vm.new_company">
+                                <label for="update_company">Company</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.country}}" id="update_country" type="text" class="validate" ng-model="vm.new_country">
+                                <label for="update_country">Country</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.industry}}" id="update_industry" type="text" class="validate" ng-model="vm.new_industry">
+                                <label for="update_industry">Industry</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.currentwork}}" id="update_currentwork" type="text" class="validate" ng-model="vm.new_current">
+                                <label for="update_currentwork">Current Work</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.account.previouswork}}" id="update_previouswork" type="text" class="validate" ng-model="vm.new_previous">
+                                <label for="update_previouswork">Previous Work</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update()">Confirm</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
+        <!--Main Body-->
+        <div class="row">
             <div id="profile" class="container">
                 <!--Background-->
                 <div class="card-body">
@@ -81,7 +142,7 @@
                                 <img src=".\images\header-summary.png" class="valign" />
                                 <h3 class="valign">Summary</h3>
                             </div>
-                            <p class="description">{{sc.summary}}</p>
+                            <p class="description">{{vm.summary}}</p>
                         </div>
                         <!--Experience-->
                         <div class="background-section">
@@ -89,7 +150,7 @@
                                 <img src=".\images\header-experience.png" class="valign" />
                                 <h3 class="valign">Experience</h3>
                             </div>
-                            <div ng-repeat="exp in sc.experience">
+                            <div ng-repeat="exp in vm.experience">
                                 <div class="row info-bar">
                                     <div style="display: inline-block">
                                         <a href="https://www.linkedin.com/title/{{exp.title}}?trk=mprofile_title"
@@ -118,7 +179,7 @@
                             <div id="skills-section">
                                 <div>
                                     <h5>Top Skills</h5>
-                                    <div class="skill-pill" ng-repeat="skill in sc.skills | limitTo: 10">
+                                    <div class="skill-pill" ng-repeat="skill in vm.skills | limitTo: 10">
                                         <a class="btn-skill-count waves-effect waves-light btn">{{skill.endorsers}}</a>
                                         <a class="btn-skill-description" href="https://www.linkedin.com/topic/{{skill.name}}?trk=mprofile_topic">
                                             {{skill.name}}
@@ -127,7 +188,7 @@
                                 </div>
                                 <div id="extra-skills" ng-show="skills.length > 10">
                                     <h5>{{name[0]}} also knows about...</h5>
-                                    <div class="skill-pill" ng-repeat="skill in skills" ng-show="$index >= 10">
+                                    <div class="skill-pill" ng-repeat="skill in vm.skills" ng-show="$index >= 10">
                                         <a class="btn-skill-count waves-effect waves-light btn">{{skill.endorsers}}</a>
                                         <a class="btn-skill-description" href="https://www.linkedin.com/topic/{{skill.name}}?trk=mprofile_topic">
                                             {{skill.name}}
@@ -136,14 +197,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!--EDUCATION SECTION-->
+                        <!--Education-->
                         <div class="background-section background-last-section">
                             <div class="valign-wrapper background-section-header">
                                 <img src=".\images\header-education.png" class="valign" />
                                 <h3 class="valign">Education</h3>
                             </div>
                             <div>
-                                <div class="row info-bar" ng-repeat="edu in sc.education">
+                                <div class="row info-bar" ng-repeat="edu in vm.education">
                                     <div style="display: inline-block">
                                         <a href="{{edu.url}}" class="info-title">{{edu.name}}</a>
                                         <a class="info-subtitle">{{edu.title}}</a>
@@ -161,5 +222,11 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            $(document).ready(function() {
+                $('.modal-trigger').leanModal();
+            });
+        </script>
     </body>
 </html>

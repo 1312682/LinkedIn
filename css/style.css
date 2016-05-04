@@ -53,6 +53,14 @@ body {
     list-style-type: none;
 }
 
+.profile-overall-summary img {
+    display: none;
+}
+
+.profile-overall-summary:hover img{
+    display: block;
+}
+
 .profile-overall-extra {
     -webkit-box-shadow: 0 1px 0 #fff inset;
     -moz-box-shadow: 0 1px 0 #fff inset;
@@ -224,9 +232,11 @@ body {
     line-height: 16px;
     color: #96999c;
 }
+
 .info-subtitle:hover {
     color: #006fa6;
 }
+
 .info-date {
     display: block;
     margin-top: 3px;
@@ -234,12 +244,14 @@ body {
     font-size: 13px;
     line-height: 17px;
 }
+
 .info-logo {
     float: right;
     margin-right: 10px;
     width: 100px;
     text-align: center;
 }
+
 .info-logo img {
     max-width: 100px;
     max-height: 60px;
@@ -250,29 +262,31 @@ body {
     height: 25px;
     margin: 0px 6px 6px 0px;
 }
+
 .skill-pill a {
     float: left;
     height: inherit;
     line-height: 24px;
 }
+
 .btn-skill-count {
-    padding: 0px 2px;
-    
+    padding: 0px 2px;    
     background-color: #1ba8e5;
     border-bottom: 1px solid #1ba8e5;
     border-radius: 3px 0 0 3px;
     min-width: 22px;
-
     background-image: none;
-     
+
     font-size: 12px;
     text-shadow: #666 0 1px 0;
     text-align: center;
 }
+
 .btn-skill-count:hover {
     background-image: none;
     background-color: #069;
 }
+
 .btn-skill-description {
     padding: 0px 13px;
     
@@ -284,9 +298,11 @@ body {
     font-size: 13px;
     color: #333;
 }
+
 .btn-skill-description:hover {
     color: #006fa6;
 }
+
 #skills-section h5 {
     font-size: 14px;
     font-weight: normal;
@@ -295,7 +311,12 @@ body {
     margin-top: 30px;
     margin-bottom: 20px;
 }
+
 #extra-skills .skill-pill {
     display: inline-block;
     margin-bottom: 0px;
+}
+
+.update-infor {
+    margin-top: -50px;
 }
