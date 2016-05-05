@@ -159,6 +159,38 @@
                 vm.new_project_des = undefined;
             }
             
+            vm.update_project = function () {
+                if (vm.update_project_name != undefined)
+                    vm.project[vm.current_item].name = vm.update_project_name;
+                if (vm.update_date != undefined)
+                    vm.project[vm.current_item].date = vm.update_date;
+                if (vm.update_project_des != undefined)
+                    vm.project[vm.current_item].description = vm.update_project_des;
+                    
+                vm.update_project_name = undefined;
+                vm.update_project_des = undefined;
+                vm.update_date = undefined;         
+            }
+            
+            vm.add_edu = function () {
+                var new_edu = {
+                    "name": vm.new_edu,
+                    "url": vm.new_edu_url,
+                    "logo": vm.new_edu_logo,
+                    "title": vm.new_edu_title,
+                    "startPeriod": vm.new_edu_start,
+                    "endPeriod": vm.new_edu_end
+                }
+                
+                vm.education.push(new_edu);
+                vm.new_edu = undefined;
+                vm.new_edu_end = undefined;
+                vm.new_edu_title = undefined;
+                vm.new_edu_logo = undefined;
+                vm.new_edu_start = undefined;
+                vm.new_edu_url = undefined;
+            }
+            
             $scope.initModals = function() {
                 $('.modal-trigger').leanModal(); // Initialize the modals
             }

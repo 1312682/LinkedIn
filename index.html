@@ -370,6 +370,50 @@
             </div>
         </div>
         
+        <div id="addedumodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Add Education</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_edu_name" type="text" class="validate" ng-model="vm.new_edu">
+                                <label for="add_edu_name">Name of school</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_url" type="text" class="validate" ng-model="vm.new_edu_url">
+                                <label for="add_url">Url of school</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_edu_logo" type="text" class="validate" ng-model="vm.new_edu_logo">
+                                <label for="add_edu_logo">Logo of school</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_edu_title" type="text" class="validate" ng-model="vm.new_edu_title">
+                                <label for="add_edu_title">Title</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_edu_start" type="text" class="validate" ng-model="vm.new_edu_start">
+                                <label for="add_edu_start">Start Period</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_edu_end" type="text" class="validate" ng-model="vm.new_edu_end">
+                                <label for="add_edu_end">End Period</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.add_edu()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
         <!--Main Body-->
         <div class="row">
             <div id="profile" class="container">
@@ -482,7 +526,7 @@
                                         <a class="info-date">{{proj.date}}</a>
                                     </div>
                                     <a href="#projectmodal" class="modal-trigger info-logo" ng-click="vm.checkItem($index)">
-                                        <img src="images/ic_mode_edit.png"/> 
+                                        <img src="images/ic_mode_edit.png"/>
                                     </a>
                                 </div>
                                 <p class="description">{{proj.description}}</p>
@@ -491,9 +535,14 @@
                         
                         <!--Education-->
                         <div class="background-section background-last-section">
-                            <div class="valign-wrapper background-section-header">
+                            <div class="valign-wrapper background-section-header edit">
                                 <img src=".\images\header-education.png" class="valign" />
                                 <h3 class="valign">Education</h3>
+                                <div class="info-logo">
+                                    <a href="#addedumodal" class="modal-trigger">
+                                        <img src="images/ic_mode_add.png"/> 
+                                    </a>                                    
+                                </div>
                             </div>
                             <div>
                                 <div class="row info-bar" ng-repeat="edu in vm.education">
