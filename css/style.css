@@ -246,6 +246,7 @@ body {
     color: #66696a;
     font-size: 13px;
     line-height: 17px;
+    float: left;
 }
 
 .info-logo {

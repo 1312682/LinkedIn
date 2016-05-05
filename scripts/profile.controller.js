@@ -136,6 +136,16 @@
                 vm.new_endorsers = undefined;
             }
             
+            vm.update_skill = function () {
+                if (vm.update_skill_name != undefined)
+                    vm.skills[vm.current_item].name = vm.update_skill_name;
+                if (vm.update_endorsers != undefined)
+                    vm.skills[vm.current_item].endorsers = vm.update_endorsers;
+                    
+                vm.update_skill = undefined;
+                vm.update_endorsers = undefined;        
+            }
+            
             vm.add_project = function () {
                 var new_project = {
                     "name": vm.new_project,

@@ -290,6 +290,30 @@
             </div>
         </div>
         
+        <div id="skillmodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Edit Skill</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.skills[vm.current_item].name}}" id="update_skill_name" type="text" class="validate" ng-model="vm.update_skill_name">
+                                <label for="update_skill_name">Skill</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.skills[vm.current_item].endorsers}}" id="update_endorsers" type="text" class="validate" ng-model="vm.update_endorsers">
+                                <label for="update_endorsers">Endorsers</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update_skill()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
         <div id="addprojectmodal" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <h4>Add Project</h4>
@@ -305,15 +329,43 @@
                                 <label for="add_date">Date Complete</label>
                             </div>
                             <div class="input-field col s12">
-                            <textarea id="add_project_des" class="materialize-textarea" ng-model="vm.new_project_des"></textarea>
-                            <label for="add_project_des">Descrtiption</label>
-                        </div>
+                                <textarea id="add_project_des" class="materialize-textarea" ng-model="vm.new_project_des"></textarea>
+                                <label for="add_project_des">Descrtiption</label>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.add_project()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
+        <div id="projectmodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Edit Project</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.project[vm.current_item].name}}" id="update_project_name" type="text" class="validate" ng-model="vm.update_project_name">
+                                <label for="update_project_name">Project Name</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.project[vm.current_item].date}}" id="update_date" type="text" class="validate" ng-model="vm.update_date">
+                                <label for="update_date">Date Complete</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea placeholder="{{vm.project[vm.current_item].description}}" id="update_project_des" class="materialize-textarea" ng-model="vm.update_project_des"></textarea>
+                                <label for="update_project_des">Descrtiption</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update_project()">Confirm</a>
                 <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
             </div>
         </div>
@@ -390,10 +442,13 @@
                             <div id="skills-section">
                                 <div>
                                     <h5>Top Skills</h5>
-                                    <div class="skill-pill" ng-repeat="skill in vm.skills | limitTo: 15">
+                                    <div class="skill-pill edit" ng-repeat="skill in vm.skills | limitTo: 15" repeat-done="initModals()">
                                         <a class="btn-skill-count waves-effect waves-light btn">{{vm.check(skill.endorsers)}}</a>
                                         <a class="btn-skill-description" href="https://www.linkedin.com/topic/{{skill.name}}?trk=mprofile_topic">
                                             {{skill.name}}
+                                        </a>
+                                        <a href="#skillmodal" class="modal-trigger info-logo" ng-click="vm.checkItem($index)">
+                                            <img src="images/ic_mode_edit.png"/> 
                                         </a>
                                     </div>
                                 </div>
@@ -420,12 +475,15 @@
                                     </a>                                    
                                 </div>
                             </div>
-                            <div ng-repeat="proj in vm.project">
+                            <div class="edit" ng-repeat="proj in vm.project" repeat-done="initModals()">
                                 <div class="row info-bar" >
                                     <div style="display: inline-block">
                                         <a class="info-title">{{proj.name}}</a>
                                         <a class="info-date">{{proj.date}}</a>
                                     </div>
+                                    <a href="#projectmodal" class="modal-trigger info-logo" ng-click="vm.checkItem($index)">
+                                        <img src="images/ic_mode_edit.png"/> 
+                                    </a>
                                 </div>
                                 <p class="description">{{proj.description}}</p>
                             </div>
