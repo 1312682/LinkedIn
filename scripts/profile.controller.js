@@ -191,6 +191,28 @@
                 vm.new_edu_url = undefined;
             }
             
+            vm.update_edu = function () {
+                if (vm.update_edu_name != undefined)
+                    vm.education[vm.current_item].name = vm.update_edu_name;
+                if (vm.update_edu_url != undefined)
+                    vm.education[vm.current_item].url = vm.update_edu_url;
+                if (vm.update_edu_logo != undefined)
+                    vm.education[vm.current_item].logo = vm.update_edu_logo;
+                if (vm.update_edu_title != undefined)
+                    vm.education[vm.current_item].title = vm.update_edu_title;
+                if (vm.update_edu_start != undefined)
+                    vm.education[vm.current_item].startPeriod = vm.update_edu_start;
+                if (vm.update_edu_end != undefined)
+                    vm.education[vm.current_item].endPeriod = vm.update_edu_end;
+                    
+                vm.update_edu_name = undefined;
+                vm.update_edu_url = undefined;
+                vm.update_edu_logo = undefined;
+                vm.update_edu_title = undefined;
+                vm.update_edu_start = undefined;
+                vm.update_edu_end = undefined;                      
+            }
+            
             $scope.initModals = function() {
                 $('.modal-trigger').leanModal(); // Initialize the modals
             }

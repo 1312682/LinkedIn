@@ -414,6 +414,50 @@
             </div>
         </div>
         
+        <div id="edumodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Education Edit</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.education[vm.current_item].name}}" id="update_edu_name" type="text" class="validate" ng-model="vm.update_edu_name">
+                                <label for="update_edu_name">Name of school</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.education[vm.current_item].url}}" id="update_edu_url" type="text" class="validate" ng-model="vm.update_edu_url">
+                                <label for="update_edu_url">Url of school</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.education[vm.current_item].logo}}" id="update_edu_logo" type="text" class="validate" ng-model="vm.update_edu_logo">
+                                <label for="update_edu_logo">Logo of school</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.education[vm.current_item].title}}" id="update_edu_title" type="text" class="validate" ng-model="vm.update_edu_title">
+                                <label for="update_edu_title">Title</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.education[vm.current_item].startPeriod}}" id="update_edu_start" type="text" class="validate" ng-model="vm.update_edu_start">
+                                <label for="update_edu_start">Start of Period</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="{{vm.education[vm.current_item].endPeriod}}" id="update_edu_end" type="text" class="validate" ng-model="vm.update_edu_end">
+                                <label for="update_edu_end">End of Period</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update_edu()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
         <!--Main Body-->
         <div class="row">
             <div id="profile" class="container">
@@ -545,9 +589,14 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="row info-bar" ng-repeat="edu in vm.education">
-                                    <div style="display: inline-block">
+                                <div class="row info-bar" ng-repeat="edu in vm.education" repeat-done="initModals()">
+                                    <div style="display: inline-block" class="edit">
                                         <a href="{{edu.url}}" class="info-title">{{edu.name}}</a>
+                                        <div class="info-logo">
+                                            <a href="#edumodal" class="modal-trigger" ng-click="vm.checkItem($index)">
+                                                <img src="images/ic_mode_edit.png"/> 
+                                            </a>                                    
+                                        </div>
                                         <a class="info-subtitle">{{edu.title}}</a>
                                         <span class="info-date">{{edu.startPeriod}} – {{edu.endPeriod}}</span>
                                     </div>
