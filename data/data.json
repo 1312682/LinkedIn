@@ -22,15 +22,26 @@
             "startPeriod": "December 2008",
             "endPeriod": "Present",
             "duration": "7 years 5 months",
-            "location": "",
+            "location": "Moutain View, CA",
             "description": "Connecting the world's professionals to make them more productive and successful. Since joining the company in December 2008, LinkedIn has expanded its global platform to 23 languages and more than 30 offices around the world, grown its membership base from 33M to more than 347M, and increased its revenue from $78M to over $2.2B in 2014."
+        },
+        {
+            "companyName": "Intuit",
+            "companyUrl": "https://www.linkedin.com/company/1666?trk=prof-exp-company-name",
+            "companyLogo": "images/intuit.png",
+            "title": "Member, Board of Directors",
+            "startPeriod": "April 2012",
+            "endPeriod": "Present",
+            "duration": "4 years 1 month",
+            "location": "Moutain View, CA",
+            "description": "With revenue of $4B+ and approximately 8,000 employees, Intuit is a leading provider of innovative business and financial management solutions for small and medium-sized businesses, consumers, accounting professionals and financial institutions."
         }
     ],
     
     "skills": [
         {
             "name": "C++",
-            "endorsers": "20"
+            "endorsers": "100"
         },
         {
             "name": "C#/.NET",
@@ -55,6 +66,19 @@
         {
             "name": "Data Structure",
             "endorsers": "18"
+        }
+    ],
+    
+    "project": [
+        {
+            "name": "Attendance Solution and Roadmap Report DMS ONE",
+            "date": "March 2016",
+            "description": "Using the Google API and OleDB to calculate the employee's hours and get the location where the employee is passing through the coordinates."
+        },
+        {
+            "name": "Minesweeper Console",
+            "date": "November 2013",
+            "description": "Basic recursion."
         }
     ],
     

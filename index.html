@@ -14,6 +14,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/profile.module.js"></script>
         <script src="scripts/profile.controller.js"></script>
+        <script src="scripts/profile.directive.js"></script>
         <!--Import jQuery before materialize.js-->
         <script src="scripts/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="scripts/materialize.min.js"></script>
@@ -30,7 +31,7 @@
                     <img src="images/avatar.jpg" alt="Avatar">
                 </div>
                 
-                <div class="profile-overall-summary">
+                <div class="profile-overall-summary edit">
                     <div class="info-logo">
                         <a href="#profilemodal" class="modal-trigger">
                             <img src="images/ic_mode_edit.png"/> 
@@ -77,7 +78,7 @@
         <!-- Modal Structure -->
         <div id="profilemodal" class="modal modal-fixed-footer">
             <div class="modal-content">
-                <h4>Information</h4>
+                <h4>Information Edit</h4>
                 <div class="row update-infor">
                     <form class="col s12">
                         <div class="row">
@@ -124,8 +125,196 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update()">Confirm</a>
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update_account()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
+        <div id="summarymodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Summary Edit</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="summary-edit" class="materialize-textarea" placeholder="{{vm.summary}}" ng-model="vm.new_summary"></textarea>
+                                <label for="summary-edit">Summary</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update_summary()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>   
+        
+        <div id="addexpmodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Add Experience</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_title" type="text" class="validate" ng-model="vm.new_title">
+                                <label for="add_title">Title</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_companyName" type="text" class="validate" ng-model="vm.new_companyName">
+                                <label for="add_companyName">Name of Company</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_url" type="text" class="validate" ng-model="vm.new_url">
+                                <label for="add_url">Company URLs</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_logo" type="text" class="validate" ng-model="vm.new_logo">
+                                <label for="add_logo">Company Logo</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_start" type="text" class="validate" ng-model="vm.new_start">
+                                <label for="add_start">Start of Period</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_end" type="text" class="validate" ng-model="vm.new_end">
+                                <label for="add_end">End of Period</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_duration" type="text" class="validate" ng-model="vm.new_duration">
+                                <label for="add_duration">Duration</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_location" type="text" class="validate" ng-model="vm.new_location">
+                                <label for="add_location">Location</label>
+                            </div>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="add_description" class="materialize-textarea" ng-model="vm.new_description"></textarea>
+                            <label for="add_description">Descrtiption</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.add_exp()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
+        <div id="editmodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Experience Edit</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Enter your title" id="add_title" type="text" class="validate" ng-model="vm.new_title">
+                                <label for="add_title">Title</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="Enter your company" id="add_companyName" type="text" class="validate" ng-model="vm.new_companyName">
+                                <label for="add_companyName">Name of Company</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Enter company url" id="add_url" type="text" class="validate" ng-model="vm.new_url">
+                                <label for="add_url">Company URLs</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input placeholder="Enter company logo" id="add_logo" type="text" class="validate" ng-model="vm.new_logo">
+                                <label for="add_logo">Company Logo</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_start" type="text" class="validate" ng-model="vm.new_start">
+                                <label for="add_start">Start of Period</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_end" type="text" class="validate" ng-model="vm.new_end">
+                                <label for="add_end">End of Period</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_duration" type="text" class="validate" ng-model="vm.new_duration">
+                                <label for="add_duration">Duration</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_location" type="text" class="validate" ng-model="vm.new_location">
+                                <label for="add_location">Location</label>
+                            </div>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="add_description" class="materialize-textarea" ng-model="vm.new_description"></textarea>
+                            <label for="add_description">Descrtiption</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.add_exp()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
+        <div id="addskillmodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Add Skill Item</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_skill_name" type="text" class="validate" ng-model="vm.new_skill">
+                                <label for="add_skill_name">Skill</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_endorsers" type="text" class="validate" ng-model="vm.new_endorsers">
+                                <label for="add_endorsers">Endorsers</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.add_skill()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+        
+        <div id="addprojectmodal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Add Project</h4>
+                <div class="row update-infor">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="add_project_name" type="text" class="validate" ng-model="vm.new_project">
+                                <label for="add_project_name">Project Name</label>
+                            </div>  
+                            <div class="input-field col s6">
+                                <input id="add_date" type="text" class="validate" ng-model="vm.new_date">
+                                <label for="add_date">Date Complete</label>
+                            </div>
+                            <div class="input-field col s12">
+                            <textarea id="add_project_des" class="materialize-textarea" ng-model="vm.new_project_des"></textarea>
+                            <label for="add_project_des">Descrtiption</label>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.add_project()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
             </div>
         </div>
         
@@ -138,57 +327,79 @@
                     <div id="background-content" class="card-content">
                         <!--Summary-->
                         <div class="background-section">
-                            <div class="valign-wrapper background-section-header">
+                            <div class="valign-wrapper background-section-header edit">
                                 <img src=".\images\header-summary.png" class="valign" />
                                 <h3 class="valign">Summary</h3>
+                                <div class="info-logo">
+                                    <a href="#summarymodal" class="modal-trigger">
+                                        <img src="images/ic_mode_edit.png"/> 
+                                    </a>                                    
+                                </div>
                             </div>
                             <p class="description">{{vm.summary}}</p>
                         </div>
+                        
                         <!--Experience-->
                         <div class="background-section">
-                            <div class="valign-wrapper background-section-header">
+                            <div class="valign-wrapper background-section-header edit">
                                 <img src=".\images\header-experience.png" class="valign" />
                                 <h3 class="valign">Experience</h3>
+                                <div class="info-logo">
+                                    <a href="#addexpmodal" class="modal-trigger">
+                                        <img src="images/ic_mode_add.png"/> 
+                                    </a>                                    
+                                </div>
                             </div>
-                            <div ng-repeat="exp in vm.experience">
+                            <div ng-repeat="exp in vm.experience" repeat-done="initModals()">
                                 <div class="row info-bar">
-                                    <div style="display: inline-block">
+                                    <div style="display: inline-block" class="edit">
                                         <a href="https://www.linkedin.com/title/{{exp.title}}?trk=mprofile_title"
-                                            title="Learn more about this title" class="info-title">{{exp.title}}</a>
+                                            title="Learn more about this title" class="info-title">{{exp.title}}</a>            
                                         <a href="{{exp.companyUrl}}" class="info-subtitle">{{exp.companyName}}</a>
+                                        <div class="info-logo">
+                                            <a href="#editmodal" class="modal-trigger">
+                                                <img src="images/ic_mode_edit.png"/> 
+                                            </a>                                    
+                                        </div>
                                         <span class="info-date">{{exp.startPeriod}} – {{exp.endPeriod}}
                                             <span ng-show="exp.duration != ''">({{exp.duration}})</span>
-                                        <span ng-show="exp.location != ''"> | {{exp.location}}</span>
+                                            <span ng-show="exp.location != ''"> | {{exp.location}}</span>
                                         </span>
                                     </div>
                                     <div class="info-logo" ng-show="exp.companyLogo != ''">
                                         <a href="{{exp.companyUrl}}">
-                                        <img src="{{exp.companyLogo}}" /> 
+                                            <img src="{{exp.companyLogo}}"/> 
                                         </a>                                    
                                     </div>
                                 </div>
                                 <p class="description">{{exp.description}}</p>
                             </div>
                         </div>
+                        
                         <!--Skills-->
                         <div class="background-section">
-                            <div class="valign-wrapper background-section-header">
+                            <div class="valign-wrapper background-section-header edit">
                                 <img src=".\images\header-skill.png" class="valign" />
                                 <h3 class="valign">Skills</h3>
+                                <div class="info-logo">
+                                    <a href="#addskillmodal" class="modal-trigger">
+                                        <img src="images/ic_mode_add.png"/> 
+                                    </a>                                    
+                                </div>
                             </div>
                             <div id="skills-section">
                                 <div>
                                     <h5>Top Skills</h5>
-                                    <div class="skill-pill" ng-repeat="skill in vm.skills | limitTo: 10">
-                                        <a class="btn-skill-count waves-effect waves-light btn">{{skill.endorsers}}</a>
+                                    <div class="skill-pill" ng-repeat="skill in vm.skills | limitTo: 15">
+                                        <a class="btn-skill-count waves-effect waves-light btn">{{vm.check(skill.endorsers)}}</a>
                                         <a class="btn-skill-description" href="https://www.linkedin.com/topic/{{skill.name}}?trk=mprofile_topic">
                                             {{skill.name}}
                                         </a>
                                     </div>
                                 </div>
-                                <div id="extra-skills" ng-show="skills.length > 10">
-                                    <h5>{{name[0]}} also knows about...</h5>
-                                    <div class="skill-pill" ng-repeat="skill in vm.skills" ng-show="$index >= 10">
+                                <div id="extra-skills" ng-show="skills.length > 15">
+                                    <h5>{{vm.account.name}} also knows about...</h5>
+                                    <div class="skill-pill" ng-repeat="skill in vm.skills" ng-show="$index >= 15">
                                         <a class="btn-skill-count waves-effect waves-light btn">{{skill.endorsers}}</a>
                                         <a class="btn-skill-description" href="https://www.linkedin.com/topic/{{skill.name}}?trk=mprofile_topic">
                                             {{skill.name}}
@@ -197,6 +408,29 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!--Projects-->
+                        <div class="background-section">
+                            <div class="valign-wrapper background-section-header edit">
+                                <img src=".\images\header-project.png" class="valign" />
+                                <h3 class="valign">Projects</h3>
+                                <div class="info-logo">
+                                    <a href="#addprojectmodal" class="modal-trigger">
+                                        <img src="images/ic_mode_add.png"/> 
+                                    </a>                                    
+                                </div>
+                            </div>
+                            <div ng-repeat="proj in vm.project">
+                                <div class="row info-bar" >
+                                    <div style="display: inline-block">
+                                        <a class="info-title">{{proj.name}}</a>
+                                        <a class="info-date">{{proj.date}}</a>
+                                    </div>
+                                </div>
+                                <p class="description">{{proj.description}}</p>
+                            </div>
+                        </div>
+                        
                         <!--Education-->
                         <div class="background-section background-last-section">
                             <div class="valign-wrapper background-section-header">
@@ -227,6 +461,8 @@
             $(document).ready(function() {
                 $('.modal-trigger').leanModal();
             });
+            $('#summary-edit').trigger('autoresize');
+            $('#add_description').trigger('autoresize');
         </script>
     </body>
 </html>
