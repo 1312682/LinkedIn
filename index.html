@@ -208,60 +208,60 @@
             </div>
         </div>
         
-        <div id="editmodal" class="modal modal-fixed-footer">
+        <div id="expmodal" class="modal modal-fixed-footer">
             <div class="modal-content">
                 <h4>Experience Edit</h4>
                 <div class="row update-infor">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s6">
-                                <input placeholder="Enter your title" id="add_title" type="text" class="validate" ng-model="vm.new_title">
-                                <label for="add_title">Title</label>
+                                <input placeholder="{{vm.experience[vm.current_item].title}}" id="update_title" type="text" class="validate" ng-model="vm.update_title">
+                                <label for="update_title">Title</label>
                             </div>  
                             <div class="input-field col s6">
-                                <input placeholder="Enter your company" id="add_companyName" type="text" class="validate" ng-model="vm.new_companyName">
-                                <label for="add_companyName">Name of Company</label>
+                                <input placeholder="{{vm.experience[vm.current_item].companyName}}" id="update_companyName" type="text" class="validate" ng-model="vm.update_companyName">
+                                <label for="update_companyName">Name of Company</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input placeholder="Enter company url" id="add_url" type="text" class="validate" ng-model="vm.new_url">
-                                <label for="add_url">Company URLs</label>
+                                <input placeholder="{{vm.experience[vm.current_item].companyUrl}}" id="update_url" type="text" class="validate" ng-model="vm.update_url">
+                                <label for="update_url">Company URLs</label>
                             </div>  
                             <div class="input-field col s6">
-                                <input placeholder="Enter company logo" id="add_logo" type="text" class="validate" ng-model="vm.new_logo">
-                                <label for="add_logo">Company Logo</label>
+                                <input placeholder="{{vm.experience[vm.current_item].companyLogo}}" id="update_logo" type="text" class="validate" ng-model="vm.update_logo">
+                                <label for="update_logo">Company Logo</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="add_start" type="text" class="validate" ng-model="vm.new_start">
-                                <label for="add_start">Start of Period</label>
+                                <input placeholder="{{vm.experience[vm.current_item].startPeriod}}" id="update_start" type="text" class="validate" ng-model="vm.update_start">
+                                <label for="update_start">Start of Period</label>
                             </div>  
                             <div class="input-field col s6">
-                                <input id="add_end" type="text" class="validate" ng-model="vm.new_end">
-                                <label for="add_end">End of Period</label>
+                                <input placeholder="{{vm.experience[vm.current_item].endPeriod}}" id="update_end" type="text" class="validate" ng-model="vm.update_end">
+                                <label for="update_end">End of Period</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="add_duration" type="text" class="validate" ng-model="vm.new_duration">
-                                <label for="add_duration">Duration</label>
+                                <input placeholder="{{vm.experience[vm.current_item].duration}}" id="update_duration" type="text" class="validate" ng-model="vm.update_duration">
+                                <label for="update_duration">Duration</label>
                             </div>  
                             <div class="input-field col s6">
-                                <input id="add_location" type="text" class="validate" ng-model="vm.new_location">
-                                <label for="add_location">Location</label>
+                                <input placeholder="{{vm.experience[vm.current_item].location}}" id="update_location" type="text" class="validate" ng-model="vm.update_location">
+                                <label for="update_location">Location</label>
                             </div>
                         </div>
                         <div class="input-field col s12">
-                            <textarea id="add_description" class="materialize-textarea" ng-model="vm.new_description"></textarea>
-                            <label for="add_description">Descrtiption</label>
+                            <textarea placeholder="{{vm.experience[vm.current_item].description}}" id="update_description" class="materialize-textarea" ng-model="vm.update_description"></textarea>
+                            <label for="update_description">Descrtiption</label>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.add_exp()">Confirm</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.update_exp()">Confirm</a>
                 <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
             </div>
         </div>
@@ -357,7 +357,7 @@
                                             title="Learn more about this title" class="info-title">{{exp.title}}</a>            
                                         <a href="{{exp.companyUrl}}" class="info-subtitle">{{exp.companyName}}</a>
                                         <div class="info-logo">
-                                            <a href="#editmodal" class="modal-trigger">
+                                            <a href="#expmodal" class="modal-trigger" ng-click="vm.checkItem($index)">
                                                 <img src="images/ic_mode_edit.png"/> 
                                             </a>                                    
                                         </div>

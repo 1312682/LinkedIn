@@ -12,6 +12,7 @@
             vm.skills = {};
             vm.education = {};
             vm.project = {};
+            vm.current_item = 0;
             
             $http.get('data/data.json')
                 .then(function(response){
@@ -27,6 +28,10 @@
                 if (parseFloat(params) > 99)
                     return "99+";
                 return params;
+            }
+            
+            vm.checkItem = function (params) {
+                vm.current_item = parseFloat(params);
             }    
             
             vm.update_account = function () {
@@ -88,6 +93,37 @@
                 vm.new_location = undefined;
                 vm.new_description = undefined;
             } 
+            
+            vm.update_exp = function () {
+                if (vm.update_companyName != undefined)
+                    vm.experience[vm.current_item].companyName = vm.update_companyName;
+                if (vm.update_title != undefined)
+                    vm.experience[vm.current_item].title = vm.update_title;
+                if (vm.update_url != undefined)
+                    vm.experience[vm.current_item].companyUrl = vm.update_url;
+                if (vm.update_logo != undefined)
+                    vm.experience[vm.current_item].companyLogo = vm.update_logo;
+                if (vm.update_start != undefined)
+                    vm.experience[vm.current_item].startPeriod = vm.update_start;
+                if (vm.update_end != undefined)
+                    vm.experience[vm.current_item].endPeriod = vm.update_end;
+                if (vm.update_duration != undefined)
+                    vm.experience[vm.current_item].duration = vm.update_duration;
+                if (vm.update_location != undefined)
+                    vm.experience[vm.current_item].location = vm.update_location;
+                if (vm.update_description != undefined)
+                    vm.experience[vm.current_item].description = vm.update_description;
+                    
+                vm.update_companyName = undefined;
+                vm.update_url = undefined;
+                vm.update_logo = undefined;
+                vm.update_title = undefined;
+                vm.update_start = undefined;
+                vm.update_end = undefined;
+                vm.update_duration = undefined;
+                vm.update_location = undefined;
+                vm.update_description = undefined;        
+            }
             
             vm.add_skill = function () {
                 var new_skill = {
