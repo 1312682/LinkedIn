@@ -15,19 +15,19 @@
             vm.current_item = 0;
 
 
-            var ref = new Firebase("https://dack.firebaseio.com/");
+            var ref = new Firebase("https://dack.firebaseio.com/");    
             var obj = $firebaseObject(ref);
-
-            obj.$bindTo($scope, 'data').then(function () {
-                vm.account = $scope.data.account;
+            
+            obj.$bindTo($scope, "data").then(function () {
                 vm.summary = $scope.data.summary;
-                vm.experience = $scope.data.experience;
-                vm.skills = $scope.data.skills;
-                vm.education = $scope.data.education;
-                vm.project = $scope.data.project;
-            })
-
-
+                vm.account = $scope.data.account;
+            });            
+            
+            vm.project = $firebaseArray(ref.child("project"));
+            vm.education = $firebaseArray(ref.child("education"));
+            vm.experience = $firebaseArray(ref.child("experience"));            
+            vm.skills = $firebaseArray(ref.child("skills"));
+            
             vm.check = function (params) {
                 if (parseFloat(params) > 99)
                     return "99+";
@@ -56,6 +56,8 @@
                 if (vm.new_previous != undefined)
                     vm.account.previouswork = vm.new_previous;
 
+                $scope.data.account = vm.account;
+
                 vm.new_name = undefined;
                 vm.new_edu = undefined;
                 vm.new_pos = undefined;
@@ -69,24 +71,25 @@
             vm.update_summary = function () {
                 if (vm.new_summary != undefined)
                     vm.summary = vm.new_summary;
-
+                
+                obj.summary = vm.new_summary;
+                obj.$save();
                 vm.new_summary = undefined;
             }
 
             vm.add_exp = function () {
-                var new_exp = {
-                    "companyName": vm.new_companyName,
-                    "companyUrl": vm.new_url,
-                    "companyLogo": vm.new_logo,
-                    "title": vm.new_title,
-                    "startPeriod": vm.new_start,
-                    "endPeriod": vm.new_end,
-                    "duration": vm.new_duration,
-                    "location": vm.new_location,
-                    "description": vm.new_description
-                }
-
-                vm.experience.push(new_exp);
+                vm.experience.$add({
+                    companyName: vm.new_companyName,
+                    companyUrl: vm.new_url,
+                    companyLogo: vm.new_logo,
+                    title: vm.new_title,
+                    startPeriod: vm.new_start,
+                    endPeriod: vm.new_end,
+                    duration: vm.new_duration,
+                    location: vm.new_location,
+                    description: vm.new_description
+                });
+                
                 vm.new_companyName = undefined;
                 vm.new_url = undefined;
                 vm.new_logo = undefined;
@@ -129,13 +132,12 @@
                 vm.update_description = undefined;
             }
 
-            vm.add_skill = function () {
-                var new_skill = {
-                    "name": vm.new_skill,
-                    "endorsers": vm.new_endorsers
-                }
-
-                vm.skills.push(new_skill);
+            $scope.add_skill = function () {
+                vm.skills.$add({
+                    name: vm.new_skill,
+                    endorsers: vm.new_endorsers
+                });
+                
                 vm.new_skill = undefined;
                 vm.new_endorsers = undefined;
             }
@@ -151,13 +153,12 @@
             }
 
             vm.add_project = function () {
-                var new_project = {
-                    "name": vm.new_project,
-                    "date": vm.new_date,
-                    "description": vm.new_project_des
-                }
+                vm.project.$add({
+                    name: vm.new_project,
+                    date: vm.new_date,
+                    description: vm.new_project_des
+                });
 
-                vm.project.push(new_project);
                 vm.new_project = undefined;
                 vm.new_date = undefined;
                 vm.new_project_des = undefined;
@@ -177,16 +178,15 @@
             }
 
             vm.add_edu = function () {
-                var new_edu = {
-                    "name": vm.new_edu,
-                    "url": vm.new_edu_url,
-                    "logo": vm.new_edu_logo,
-                    "title": vm.new_edu_title,
-                    "startPeriod": vm.new_edu_start,
-                    "endPeriod": vm.new_edu_end
-                }
+                vm.education.$add({
+                    name: vm.new_edu,
+                    url: vm.new_edu_url,
+                    logo: vm.new_edu_logo,
+                    title: vm.new_edu_title,
+                    startPeriod: vm.new_edu_start,
+                    endPeriod: vm.new_edu_end
+                })
 
-                vm.education.push(new_edu);
                 vm.new_edu = undefined;
                 vm.new_edu_end = undefined;
                 vm.new_edu_title = undefined;
