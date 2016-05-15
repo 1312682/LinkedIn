@@ -220,5 +220,9 @@
             $scope.initModals = function () {
                 $('.modal-trigger').leanModal(); // Initialize the modals
             }
+            
+            vm.isLogin = function () {
+                return false;
+            }
         });
 })();

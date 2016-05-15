@@ -324,3 +324,99 @@ body {
 .update-infor {
     margin-top: -50px;
 }
+
+#loginmodal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: #fafafa;
+    padding: 0;
+    max-height: 70%;
+    width: 55%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 2px;
+    will-change: top, opacity;
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+
+#loginmodal h4 {
+    margin-top: 0;
+    text-align: center !important;
+}
+
+#loginmodal .modal-content {
+    padding: 24px;
+}
+
+#loginmodal .modal-footer {
+    border-radius: 0 0 2px 2px;
+    background-color: #fafafa;
+    padding: 4px 6px;
+    height: 56px;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#loginmodal .modal-footer .btn-flat{
+    float: right;
+    margin: 6px 0;
+}
+
+.entry-social {
+    margin-bottom: 20px;
+    color: rgb(126, 126, 126);
+    display: block;
+    font-family: 'Open Sans',Tahoma, Verdana, Arial, sans-serif, Faruma, Faseyha;
+    font-size: 14px;
+    font-weight: normal;
+    height: auto;
+    line-height:23.799999237060547px;
+    margin-bottom: 20px;
+    width: 100%;
+    float:left;
+    border: solid 0px #aaa;
+    text-align: center;
+}
+
+.entry-social div {
+    display: block;
+    width:138px;
+    margin:2px;
+    display: inline-block;  
+    vertical-align: middle;
+}
+
+.entry-social a {
+    text-decoration:none;
+    display: block;
+    padding-left: 20px;
+    color: #FFFFFF !important;
+    font-weight: bold;
+    transition:background-color .3s; 
+}
+
+.entry-social .fb a {
+    padding: 7px 10px 7px 26px;
+    background: #3B5999 url('http://3.bp.blogspot.com/-yqD2363XuAo/UeDk98twSlI/AAAAAAAAArg/kXIzFBWmczM/s1600/fb14.png') no-repeat 10px center;
+}
+
+.entry-social .twitter a {
+    padding: 7px 10px 7px 32px;
+    background: #01BBF6 url('http://3.bp.blogspot.com/-0u8P4VQmEeU/UeDlVdilwcI/AAAAAAAAAro/lGTnlvHGyVw/s1600/twitter14.png') no-repeat 8px center;
+}
+
+.entry-social .gplus a {
+    padding: 7px 10px 7px 32px;
+    background: #D54135 url('http://3.bp.blogspot.com/-A8fFRexz_zk/UeDlgadvpiI/AAAAAAAAArw/TRd7NWNwo9s/s1600/gplus14.png') no-repeat 10px center;
+}
+
+.entry-social .fb a:hover {
+    background-color: rgb(50, 75, 129);
+}
+.entry-social .twitter a:hover {
+    background-color: rgb(1, 159, 211);
+}
+.entry-social .gplus a:hover {
+    background-color: rgb(191, 52, 40);
+}
