@@ -3,8 +3,8 @@
     'use strict';
 
     angular
-        .module('app.profile', ['firebase'])
-        .controller('ProfileController', function ($scope, $firebaseObject, $firebaseArray) {
+        .module('app.profile', ['ngMaterial', 'firebase'])
+        .controller('ProfileController', function ($scope, $firebaseObject, $firebaseArray, $mdToast) {
             var vm = this;
             vm.account = {};
             vm.summary = null;
@@ -14,20 +14,170 @@
             vm.project = {};
             vm.current_item = 0;
 
-
-            var ref = new Firebase("https://dack.firebaseio.com/");    
+            var ref = new Firebase("https://dack.firebaseio.com/");
             var obj = $firebaseObject(ref);
-            
+
             obj.$bindTo($scope, "data").then(function () {
                 vm.summary = $scope.data.summary;
                 vm.account = $scope.data.account;
-            });            
-            
+            });
+
             vm.project = $firebaseArray(ref.child("project"));
             vm.education = $firebaseArray(ref.child("education"));
-            vm.experience = $firebaseArray(ref.child("experience"));            
+            vm.experience = $firebaseArray(ref.child("experience"));
             vm.skills = $firebaseArray(ref.child("skills"));
-            
+
+            //Start Authentication zone//
+            var last = {
+                bottom: false,
+                top: true,
+                left: true,
+                right: false
+            };
+
+            $scope.toastPosition = angular.extend({}, last);
+            $scope.getToastPosition = function () {
+                return Object.keys($scope.toastPosition)
+                    .filter(function (pos) { return $scope.toastPosition[pos]; })
+                    .join(' ');
+            };
+
+            // Create a callback which logs the current auth state
+            function authDataCallback(authData) {
+                if (authData) {
+                    console.log("User " + authData.uid + " is logged in with " + authData.provider);
+                    $scope.isLogin = true;
+                } else {
+                    console.log("User is logged out");
+                    $scope.isLogin = false;
+                }
+                $scope.$evalAsync();
+            }
+
+            // Register the callback to be fired every time auth state changes
+            ref.onAuth(authDataCallback);
+
+            vm.login = function login() {
+                if (vm.user_name == undefined || vm.user_password == undefined) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Email and Password must not be empty!!!')
+                            .position($scope.getToastPosition())
+                            .hideDelay(3000)
+                    );
+                }
+                else {
+                    ref.authWithPassword({
+                        email: vm.user_name,
+                        password: vm.user_password
+                    }, authHandler);
+                }
+            }
+
+            vm.loginwithgoogle = function loginwithgoogle() {
+                ref.authWithOAuthPopup("google", function (error, authData) {
+                    if (error) {
+                        if (error.code === "TRANSPORT_UNAVAILABLE") {
+                            // fall-back to browser redirects, and pick up the session
+                            // automatically when we come back to the origin page
+                            ref.authWithOAuthRedirect("google", function (error) { /* ... */ });
+                        }
+                    } else if (authData) {
+                        // user authenticated with Firebase
+                    }
+                });
+            }
+
+            vm.loginwithtwitter = function loginwithtwitter() {
+                ref.authWithOAuthRedirect("twitter", function (error) {
+                    if (error) {
+                        console.log("Login Failed!", error);
+                    } else {
+                        // We'll never get here, as the page will redirect on success.
+                    }
+                });
+            }
+
+            vm.loginwithfacebook = function loginwithfacebook() {
+                ref.authWithOAuthPopup("facebook", function (error, authData) {
+                    if (error) {
+                        console.log("Login Failed!", error);
+                    } else {
+                        console.log("Authenticated successfully with payload:", authData);
+                    }
+                });
+            }
+
+            vm.logout = function logout() {
+                ref.unauth();
+            }
+
+            vm.register = function register() {
+                if (vm.re_email == undefined || vm.re_pass == undefined) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Email and Password must not be empty!!!')
+                            .position($scope.getToastPosition())
+                            .hideDelay(3000)
+                    );
+                }
+                else {
+                    ref.createUser({
+                        email: vm.re_email,
+                        password: vm.re_pass
+                    }, function (error, userData) {
+                        if (error) {
+                            switch (error.code) {
+                                case "EMAIL_TAKEN":
+                                    $mdToast.show(
+                                        $mdToast.simple()
+                                            .textContent('The new user account cannot be created because the email is already in use.')
+                                            .position($scope.getToastPosition())
+                                            .hideDelay(3000)
+                                    );
+                                    console.log("The new user account cannot be created because the email is already in use.");
+                                    break;
+                                case "INVALID_EMAIL":
+                                    $mdToast.show(
+                                        $mdToast.simple()
+                                            .textContent('The specified email is not a valid email.')
+                                            .position($scope.getToastPosition())
+                                            .hideDelay(3000)
+                                    );
+                                    console.log("The specified email is not a valid email.");
+                                    break;
+                                default:
+                                    console.log("Error creating user:", error);
+                            }
+                        } else {
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .textContent('Successfully created user ' + vm.re_email)
+                                    .position($scope.getToastPosition())
+                                    .hideDelay(3000)
+                            );
+                            console.log("Successfully created user account with uid:", userData.uid);
+                        }
+                    });
+                }
+            }
+
+            function authHandler(error, authData) {
+                if (error) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Invalid account!!!')
+                            .position($scope.getToastPosition())
+                            .hideDelay(3000)
+                    );
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                }
+            }
+
+            //End Authentication Zone
+
             vm.check = function (params) {
                 if (parseFloat(params) > 99)
                     return "99+";
@@ -71,7 +221,7 @@
             vm.update_summary = function () {
                 if (vm.new_summary != undefined)
                     vm.summary = vm.new_summary;
-                
+
                 obj.summary = vm.new_summary;
                 obj.$save();
                 vm.new_summary = undefined;
@@ -89,7 +239,7 @@
                     location: vm.new_location,
                     description: vm.new_description
                 });
-                
+
                 vm.new_companyName = undefined;
                 vm.new_url = undefined;
                 vm.new_logo = undefined;
@@ -137,7 +287,7 @@
                     name: vm.new_skill,
                     endorsers: vm.new_endorsers
                 });
-                
+
                 vm.new_skill = undefined;
                 vm.new_endorsers = undefined;
             }
@@ -219,10 +369,6 @@
 
             $scope.initModals = function () {
                 $('.modal-trigger').leanModal(); // Initialize the modals
-            }
-            
-            vm.isLogin = function () {
-                return false;
             }
         });
 })();

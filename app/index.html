@@ -8,28 +8,40 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/materialize.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
 </head>
 
 <body ng-app="app" ng-controller="ProfileController as vm">
     <!--Script-->
     <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
+    
+    <!--Firebase and AngularFire -->
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+    
+    <!--System JavaScript -->
     <script src="scripts/app.js"></script>
     <script src="scripts/profile.module.js"></script>
     <script src="scripts/profile.controller.js"></script>
     <script src="scripts/profile.directive.js"></script>
+    
     <!--Import jQuery before materialize.js-->
     <script src="scripts/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="scripts/materialize.min.js"></script>
 
     <!--Header-->
-    <div class="top-header" ng-show="vm.isLogin()">
+    <div class="top-header" ng-show="isLogin">
         <div class="container-fluid"></div>
     </div>
 
     <!--Basic Information-->
-    <div class="container profile" ng-show="vm.isLogin()">
+    <div class="container profile" ng-show="isLogin">
         <div class="profile-overall">
             <div class="profile-overall-picture">
                 <img src="images/avatar.jpg" alt="Avatar">
@@ -466,7 +478,7 @@
     </div>
 
     <!--Main Body-->
-    <div class="row" ng-show="vm.isLogin()">
+    <div class="row" ng-show="isLogin">
         <div id="profile" class="container">
             <!--Background-->
             <div class="card-body">
@@ -619,44 +631,72 @@
         </div>
     </div>
 
+    <footer class="container logout">
+        <button class="btn waves-light waves-effect" ng-click="vm.logout()" ng-show="isLogin">Log Out</button>
+    </footer>
+
     <!--Login-->
-    <div id="loginmodal" ng-show="!vm.isLogin()">
+    <div id="loginmodal" ng-show="!isLogin">
         <div class="modal-content">
-            <h4>Sign in</h4>
+            <h4>Log in</h4>
             <div class="row update-infor">
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="user_name" type="text" class="validate" ng-model="vm.user_name">
-                            <label for="user_name">Username</label>
+                            <input id="user_name" type="email" class="validate" ng-model="vm.user_name">
+                            <label for="user_name">Email</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="user_password" type="text" class="validate" ng-model="vm.user_password">
+                            <input id="user_password" type="password" class="validate" ng-model="vm.user_password">
                             <label for="user_password">Password</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="entry-social">
                             <div>
-                                <a href="#" class="btn waves-light waves-effect">Sign in</a>
+                                <a href="#" class="btn waves-light waves-effect" ng-click="vm.login()">Log in</a>
                             </div>
                             <span>Or</span>
                             <div class="fb">
-                                <a href="#" target="_blank">Facebook</a>
+                                <a href="#" class="textcolor" ng-click="vm.loginwithfacebook()">Facebook</a>
                             </div>
                             <div class="twitter">
-                                <a href="#" target="_blank">Twitter</a>
+                                <a href="#" class="textcolor" ng-click="vm.loginwithtwitter()">Twitter</a>
                             </div>
                             <div class="gplus">
-                                <a href="#" target="_blank">Google+</a>
+                                <a href="#" class="textcolor" ng-click="vm.loginwithgoogle()">Google+</a>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#" class="modal-action waves-effect waves-green btn-flat" ng-click="">Register</a>
+                <a href="#registermodal" class="modal-action waves-effect waves-green btn-flat modal-trigger">Register</a>
             </div>
+        </div>
+    </div>
+
+    <div id="registermodal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Register</h4>
+            <div class="row update-infor">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Your email address..." id="re_email" type="email" class="validate" ng-model="vm.re_email">
+                            <label for="re_email">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input placeholder="Enter new password..." id="re_pass" type="password" class="validate" ng-model="vm.re_pass">
+                            <label for="re_pass">Password</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.register()">Register</a>
+            <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
     </div>
 

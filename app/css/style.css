@@ -15,6 +15,14 @@ body {
     background-image: url(../images/bg-texture.png);
 }
 
+a {
+    color: black !important;
+}
+
+a:not(.btn):not(.btn-flat):not(.textcolor):hover {
+   color: #006fa6 !important; 
+}
+
 .container-fluid {
     width: 100%;
     height: 300px !important;
@@ -419,4 +427,8 @@ body {
 }
 .entry-social .gplus a:hover {
     background-color: rgb(191, 52, 40);
+}
+
+.logout {
+    width: 124.35px !important;
 }
