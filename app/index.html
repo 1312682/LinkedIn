@@ -6,37 +6,30 @@
     <meta charset="utf-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/materialize.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/materialize.css">
 </head>
 
 <body ng-app="app" ng-controller="ProfileController as vm">
-    <!--Script-->
+    <!--Angular JS Script-->
     <script type="text/javascript" src="scripts/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 
-    <!-- Angular Material Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
-    
     <!--Firebase and AngularFire -->
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-    
+
     <!--System JavaScript -->
     <script src="scripts/app.js"></script>
     <script src="scripts/profile.module.js"></script>
     <script src="scripts/profile.controller.js"></script>
     <script src="scripts/profile.directive.js"></script>
-    
+
     <!--Import jQuery before materialize.js-->
     <script src="scripts/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="scripts/materialize.min.js"></script>
 
     <!--Header-->
-    <div class="top-header" ng-show="isLogin">
+    <div class="top-header">
         <div class="container-fluid"></div>
     </div>
 
@@ -658,13 +651,13 @@
                             </div>
                             <span>Or</span>
                             <div class="fb">
-                                <a href="#" class="textcolor" ng-click="vm.loginwithfacebook()">Facebook</a>
+                                <a href="#" ng-click="vm.loginwithfacebook()">Facebook</a>
                             </div>
                             <div class="twitter">
-                                <a href="#" class="textcolor" ng-click="vm.loginwithtwitter()">Twitter</a>
+                                <a href="#" ng-click="vm.loginwithtwitter()">Twitter</a>
                             </div>
                             <div class="gplus">
-                                <a href="#" class="textcolor" ng-click="vm.loginwithgoogle()">Google+</a>
+                                <a href="#" ng-click="vm.loginwithgoogle()">Google+</a>
                             </div>
                         </div>
                     </div>
@@ -675,7 +668,12 @@
             </div>
         </div>
     </div>
-
+    
+    <div class="progress footer" ng-show="isPreloader">
+        <div class="indeterminate"></div>
+    </div>
+    
+    <!-- Register Modal -->
     <div id="registermodal" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h4>Register</h4>

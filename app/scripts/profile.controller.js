@@ -3,8 +3,8 @@
     'use strict';
 
     angular
-        .module('app.profile', ['ngMaterial', 'firebase'])
-        .controller('ProfileController', function ($scope, $firebaseObject, $firebaseArray, $mdToast) {
+        .module('app.profile', ['firebase'])
+        .controller('ProfileController', function ($scope, $firebaseObject, $firebaseArray) {
             var vm = this;
             vm.account = {};
             vm.summary = null;
@@ -13,6 +13,8 @@
             vm.education = {};
             vm.project = {};
             vm.current_item = 0;
+            
+            window.sc = $scope;
 
             var ref = new Firebase("https://dack.firebaseio.com/");
             var obj = $firebaseObject(ref);
@@ -28,29 +30,19 @@
             vm.skills = $firebaseArray(ref.child("skills"));
 
             //Start Authentication zone//
-            var last = {
-                bottom: false,
-                top: true,
-                left: true,
-                right: false
-            };
-
-            $scope.toastPosition = angular.extend({}, last);
-            $scope.getToastPosition = function () {
-                return Object.keys($scope.toastPosition)
-                    .filter(function (pos) { return $scope.toastPosition[pos]; })
-                    .join(' ');
-            };
-
+            $scope.isPreloader = false;
             // Create a callback which logs the current auth state
             function authDataCallback(authData) {
                 if (authData) {
                     console.log("User " + authData.uid + " is logged in with " + authData.provider);
                     $scope.isLogin = true;
+                    Materialize.toast("Login Successfully!!!", 3000, 'rounded');
                 } else {
                     console.log("User is logged out");
+                    Materialize.toast("Logout Successfully!!!", 3000, 'rounded');
                     $scope.isLogin = false;
                 }
+                sc.isPreloader = false;
                 $scope.$evalAsync();
             }
 
@@ -59,18 +51,14 @@
 
             vm.login = function login() {
                 if (vm.user_name == undefined || vm.user_password == undefined) {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent('Email and Password must not be empty!!!')
-                            .position($scope.getToastPosition())
-                            .hideDelay(3000)
-                    );
+                    Materialize.toast("Username or password must not be empty!!!", 3000, 'rounded');
                 }
                 else {
                     ref.authWithPassword({
                         email: vm.user_name,
                         password: vm.user_password
                     }, authHandler);
+                    sc.isPreloader = true;
                 }
             }
 
@@ -114,12 +102,7 @@
 
             vm.register = function register() {
                 if (vm.re_email == undefined || vm.re_pass == undefined) {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent('Email and Password must not be empty!!!')
-                            .position($scope.getToastPosition())
-                            .hideDelay(3000)
-                    );
+                    Materialize.toast("Username or password must not be empty!!!", 3000, 'rounded');
                 }
                 else {
                     ref.createUser({
@@ -129,33 +112,19 @@
                         if (error) {
                             switch (error.code) {
                                 case "EMAIL_TAKEN":
-                                    $mdToast.show(
-                                        $mdToast.simple()
-                                            .textContent('The new user account cannot be created because the email is already in use.')
-                                            .position($scope.getToastPosition())
-                                            .hideDelay(3000)
-                                    );
+                                    Materialize.toast("Register Failed: The email is already in use!!!", 3000, 'rounded');
                                     console.log("The new user account cannot be created because the email is already in use.");
                                     break;
                                 case "INVALID_EMAIL":
-                                    $mdToast.show(
-                                        $mdToast.simple()
-                                            .textContent('The specified email is not a valid email.')
-                                            .position($scope.getToastPosition())
-                                            .hideDelay(3000)
-                                    );
+                                    Materialize.toast("Register Failed: Invalid Email!!!", 3000, 'rounded');
                                     console.log("The specified email is not a valid email.");
                                     break;
                                 default:
+                                    Materialize.toast("Register Failed: Error creating user!!!", 3000, 'rounded');
                                     console.log("Error creating user:", error);
                             }
                         } else {
-                            $mdToast.show(
-                                $mdToast.simple()
-                                    .textContent('Successfully created user ' + vm.re_email)
-                                    .position($scope.getToastPosition())
-                                    .hideDelay(3000)
-                            );
+                            Materialize.toast("Register Successfull: User " + vm.re_email + " was created.", 3000, 'rounded');
                             console.log("Successfully created user account with uid:", userData.uid);
                         }
                     });
@@ -164,16 +133,13 @@
 
             function authHandler(error, authData) {
                 if (error) {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent('Invalid account!!!')
-                            .position($scope.getToastPosition())
-                            .hideDelay(3000)
-                    );
+                    Materialize.toast("Login Failed: Email or Password was wrong!!!", 3000, 'rounded');
                     console.log("Login Failed!", error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
                 }
+                sc.isPreloader = false;
+                sc.$evalAsync();
             }
 
             //End Authentication Zone

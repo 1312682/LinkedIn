@@ -15,14 +15,6 @@ body {
     background-image: url(../images/bg-texture.png);
 }
 
-a {
-    color: black !important;
-}
-
-a:not(.btn):not(.btn-flat):not(.textcolor):hover {
-   color: #006fa6 !important; 
-}
-
 .container-fluid {
     width: 100%;
     height: 300px !important;
@@ -339,36 +331,42 @@ a:not(.btn):not(.btn-flat):not(.textcolor):hover {
     right: 0;
     background-color: #fafafa;
     padding: 0;
-    max-height: 70%;
+    max-height: 50%;
     width: 55%;
     margin: auto;
+    margin-top: -200px;
     overflow-y: auto;
     border-radius: 2px;
     will-change: top, opacity;
     box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    padding: 0;
+    height: 70%;
 }
 
 #loginmodal h4 {
-    margin-top: 0;
+    margin-top: 10px;
     text-align: center !important;
 }
 
 #loginmodal .modal-content {
-    padding: 24px;
+    position: absolute;
+    max-height: 100%;
+    width: 100%;
+    overflow-y: auto;
 }
 
 #loginmodal .modal-footer {
     border-radius: 0 0 2px 2px;
     background-color: #fafafa;
     padding: 4px 6px;
-    height: 56px;
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 0;
 }
 
-#loginmodal .modal-footer .btn-flat{
+#loginmodal .modal-footer .btn-flat {
     float: right;
-    margin: 6px 0;
 }
 
 .entry-social {
@@ -431,4 +429,8 @@ a:not(.btn):not(.btn-flat):not(.textcolor):hover {
 
 .logout {
     width: 124.35px !important;
+}
+
+.footer {
+    margin-top: 320px !important;
 }
